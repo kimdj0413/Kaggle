@@ -5,6 +5,7 @@ from sklearn.preprocessing import LabelEncoder
 from xgboost import XGBClassifier
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 #####################################
 ##      데이터 불러오기 및 처리     ##
@@ -35,7 +36,7 @@ param_grid = {
 }
 
 grid_search = GridSearchCV(estimator=model, param_grid=param_grid, 
-                           scoring='accuracy', cv=10, verbose=1, n_jobs=-1)
+                           scoring='accuracy', cv=100, verbose=1, n_jobs=-1)
 
 ######################
 ##      학습        ##
@@ -48,6 +49,8 @@ print("Best parameters found: ", grid_search.best_params_)
 #################################
 probaRate = 0.5
 yPredProba = grid_search.predict_proba(XTest)[:, 1] #       양성 클래스 확률
+
+mean_proba = np.mean(yPredProba)
 
 threshold = probaRate
 yPred = (yPredProba >= threshold).astype(int)

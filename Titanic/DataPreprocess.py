@@ -217,13 +217,13 @@ df = df.drop(columns=['Ticket'])
 #     'F.C.': 'Fticket',
 #     'Fa':'Fticket',
     
-#     # 기타
+#     # C 계열
 #     'C.A.': 'Cticket',
 #     'CA': 'Cticket',
 #     'CA.': 'Cticket',
 #     'C.A./SOTON':'Cticket',
 #     'C':'Cticket',
-    
+      # SO 계열
 #     'S.O.C.': 'Sticket',
 #     'SO/C': 'Sticket',
 #     'S.P.': 'Sticket',
