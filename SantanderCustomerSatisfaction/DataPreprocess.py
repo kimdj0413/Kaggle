@@ -10,6 +10,7 @@ from imblearn.under_sampling import CondensedNearestNeighbour, ClusterCentroids
 ######################
 df = pd.read_csv('D:/Kaggle/SantanderCustomerSatisfaction/Data/train.csv') #_preprocess_temp
 beforeCol = df.columns
+
 ################################
 ##    모든 행이 0인 열 삭제   ##
 ################################
@@ -20,16 +21,19 @@ for col in zero_columns:
 ########################################
 ##    상관관계 0.85 이상인 열 삭제    ##
 ########################################
+print(len(df.columns))
 correlation_matrix = df.corr()
 high_corr_pairs = []
 for i in range(len(correlation_matrix.columns)):
     for j in range(i):
-        if abs(correlation_matrix.iloc[i, j]) > 0.85:
+        if abs(correlation_matrix.iloc[i, j]) > 0.9:
           if(correlation_matrix.columns[i] != correlation_matrix.columns[j] and correlation_matrix.columns[i] != 'ID' and correlation_matrix.columns[j] != 'ID' and correlation_matrix.columns[i] != 'TARGET' and correlation_matrix.columns[j] != 'TARGET'):
             try:
               df = df.drop(columns=[correlation_matrix.columns[j]])
             except KeyError as e:
               pass
+print(len(df.columns))
+
 
 ##############################################
 ##    상관관계 0.85 >= x > 0.7 인 열 병합   ##

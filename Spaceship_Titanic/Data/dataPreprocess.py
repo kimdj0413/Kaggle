@@ -46,6 +46,9 @@ def noiseAdd(column):
 
 ##    unique 값 확인
 df = pd.read_csv('D:/Kaggle/Spaceship_Titanic/Data/train.csv')
+df = df.drop(columns=['HomePlanet','Cabin','Destination','Name'])
+
+
 df['NullName'] = df['Name'].isnull().astype(int)
 noiseAdd('NullName')
 df['With'] = (df.groupby(df['PassengerId'].str[:4])['PassengerId'].transform('count'))-1
@@ -158,7 +161,7 @@ df = df.drop(columns=['PassengerId'])
 df = df.drop(columns=['Nan_side'])
 df.to_csv('D:/Kaggle/Spaceship_Titanic/Data/train_preprocess.csv', index=False)
 
-"""
+
 for col in noiseCol:
   # 'SS_T'가 양수인 행과 음수인 행의 수 계산
   positive_count = df[df[col] > 0].shape[0]
@@ -182,7 +185,7 @@ plt.figure(figsize=(8, 6))
 sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt=".2f")
 plt.title('Correlation Matrix')
 plt.show()
-
+"""
 O HomePlanet : ['Europa' 'Earth' 'Mars' nan]
 O CryoSleep : [False True nan]
   Cabin : ['B/0/P' 'F/0/S' 'A/0/S' ... 'G/1499/S' 'G/1500/S' 'E/608/S']
